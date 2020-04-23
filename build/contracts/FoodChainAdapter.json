@@ -1,0 +1,2422 @@
+{
+  "contractName": "FoodChainAdapter",
+  "abi": [
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogInterledgerEventCommitted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "reason",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogInterledgerEventAborted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "InterledgerEventSending",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "boxId",
+          "type": "string"
+        },
+        {
+          "name": "sessionId",
+          "type": "string"
+        },
+        {
+          "name": "signatures",
+          "type": "bytes32[8]"
+        }
+      ],
+      "name": "registerInterledgerEvent",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "interledgerCommit",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "reason",
+          "type": "uint256"
+        }
+      ],
+      "name": "interledgerAbort",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.4.22+commit.4cb486ee\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"interledgerCommit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"id\",\"type\":\"uint256\"},{\"name\":\"reason\",\"type\":\"uint256\"}],\"name\":\"interledgerAbort\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"id\",\"type\":\"uint256\"},{\"name\":\"boxId\",\"type\":\"string\"},{\"name\":\"sessionId\",\"type\":\"string\"},{\"name\":\"signatures\",\"type\":\"bytes32[8]\"}],\"name\":\"registerInterledgerEvent\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"LogInterledgerEventCommitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"reason\",\"type\":\"uint256\"}],\"name\":\"LogInterledgerEventAborted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"InterledgerEventSending\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{\"registerInterledgerEvent(uint256,string,string,bytes32[8])\":{\"details\":\"Function will be called by the FSC supervisor component to notify the interledger component.\",\"params\":{\"boxId\":\"The relevant box id\",\"id\":\"The identifier of  the data (internal to the supervisor)\",\"sessionId\":\"The relevant box session id\",\"signatures\":\"The generated signatures of the given session\"}}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/artemis/EthereumProjects/sofie-sc/contracts/FoodChainAdapter.sol\":\"FoodChainAdapter\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/artemis/EthereumProjects/sofie-sc/contracts/FoodChainAdapter.sol\":{\"keccak256\":\"0x4e51e1015532edccdddcb2309251860ffc62bfcc15accfb2eee3e372ed3f7c5d\",\"urls\":[\"bzzr://7db28d66ec2a04248f36ca70c596ffa4511d9acbfba0ca62cccbb510ce88542f\"]},\"/home/artemis/EthereumProjects/sofie-sc/contracts/InterledgerSenderInterface.sol\":{\"keccak256\":\"0xbc4c6b1de0eb87af6e5e6b80d6f93f0cea43d0acbc05d62b641fc350dc3d027d\",\"urls\":[\"bzzr://6ccab9daef0fee3f1c2611dc73ac675281d93709d4c8977584591075c23d9374\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060008054600160a060020a033316600160a060020a03199091161790556104678061003d6000396000f3006080604052600436106100565763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166334791cb9811461005b5780638bf36bec1461007557806393380ce614610090575b600080fd5b34801561006757600080fd5b50610073600435610153565b005b34801561008157600080fd5b50610073600435602435610189565b34801561009c57600080fd5b5060408051602060046024803582810135601f810185900485028601850190965285855261007395833595369560449491939091019190819084018382808284375050604080516020601f89358b018035918201839004830284018301909452808352979a999881019791965091820194509250829150840183828082843750506040805161010081810190925295989796818101969550935060089250849150839080828437509396506101c895505050505050565b6040805182815290517f4a7a6f2cc961bf403ed0821b181838a06451352de2e1439c89b5aa986be10de69181900360200190a150565b604080518381526020810183905281517fd1767eeeb681815a185b10b61ffb887fbaf311dde858c7b1afeeb344fbea8609929181900390910190a15050565b6000546060903373ffffffffffffffffffffffffffffffffffffffff90811691161461027b57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602e60248201527f4f6e6c792074686520636f6e7472616374206f776e65722063616e2063616c6c60448201527f20746869732066756e6374696f6e000000000000000000000000000000000000606482015290519081900360840190fd5b83838360405160200180806020018060200184600860200280838360005b838110156102b1578181015183820152602001610299565b50505050905001838103835286818151815260200191508051906020019080838360005b838110156102ed5781810151838201526020016102d5565b50505050905090810190601f16801561031a5780820380516001836020036101000a031916815260200191505b50838103825285518152855160209182019187019080838360005b8381101561034d578181015183820152602001610335565b50505050905090810190601f16801561037a5780820380516001836020036101000a031916815260200191505b509550505050505060405160208183030381529060405290507fdf615ba0704e540f1a047ab6490bef9d74f87ba3240ea085994eee58486e2e4d85826040518083815260200180602001828103825283818151815260200191508051906020019080838360005b838110156103f95781810151838201526020016103e1565b50505050905090810190601f1680156104265780820380516001836020036101000a031916815260200191505b50935050505060405180910390a150505050505600a165627a7a72305820ba08c74951b619ac92ee79c5298254ad55bde099c9a19977ac7b8898cd754e230029",
+  "deployedBytecode": "0x6080604052600436106100565763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166334791cb9811461005b5780638bf36bec1461007557806393380ce614610090575b600080fd5b34801561006757600080fd5b50610073600435610153565b005b34801561008157600080fd5b50610073600435602435610189565b34801561009c57600080fd5b5060408051602060046024803582810135601f810185900485028601850190965285855261007395833595369560449491939091019190819084018382808284375050604080516020601f89358b018035918201839004830284018301909452808352979a999881019791965091820194509250829150840183828082843750506040805161010081810190925295989796818101969550935060089250849150839080828437509396506101c895505050505050565b6040805182815290517f4a7a6f2cc961bf403ed0821b181838a06451352de2e1439c89b5aa986be10de69181900360200190a150565b604080518381526020810183905281517fd1767eeeb681815a185b10b61ffb887fbaf311dde858c7b1afeeb344fbea8609929181900390910190a15050565b6000546060903373ffffffffffffffffffffffffffffffffffffffff90811691161461027b57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602e60248201527f4f6e6c792074686520636f6e7472616374206f776e65722063616e2063616c6c60448201527f20746869732066756e6374696f6e000000000000000000000000000000000000606482015290519081900360840190fd5b83838360405160200180806020018060200184600860200280838360005b838110156102b1578181015183820152602001610299565b50505050905001838103835286818151815260200191508051906020019080838360005b838110156102ed5781810151838201526020016102d5565b50505050905090810190601f16801561031a5780820380516001836020036101000a031916815260200191505b50838103825285518152855160209182019187019080838360005b8381101561034d578181015183820152602001610335565b50505050905090810190601f16801561037a5780820380516001836020036101000a031916815260200191505b509550505050505060405160208183030381529060405290507fdf615ba0704e540f1a047ab6490bef9d74f87ba3240ea085994eee58486e2e4d85826040518083815260200180602001828103825283818151815260200191508051906020019080838360005b838110156103f95781810151838201526020016103e1565b50505050905090810190601f1680156104265780820380516001836020036101000a031916815260200191505b50935050505060405180910390a150505050505600a165627a7a72305820ba08c74951b619ac92ee79c5298254ad55bde099c9a19977ac7b8898cd754e230029",
+  "sourceMap": "70:1327:1:-;;;279:56;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;310:5:1;:18;;-1:-1:-1;;;;;318:10:1;310:18;-1:-1:-1;;;;;;310:18:1;;;;;;70:1327;;;;;;",
+  "deployedSourceMap": "70:1327:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1164:100;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;1164:100:1;;;;;;;1274:121;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;1274:121:1;;;;;;;870:284;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;870:284:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;870:284:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;870:284:1;;;;-1:-1:-1;870:284:1;-1:-1:-1;870:284:1;;-1:-1:-1;870:284:1;;;;;;;;-1:-1:-1;;870:284:1;;;;;;;;;;;;;;;;;;;-1:-1:-1;870:284:1;-1:-1:-1;870:284:1;;-1:-1:-1;870:284:1;;-1:-1:-1;870:284:1;;;;;;-1:-1:-1;870:284:1;;-1:-1:-1;870:284:1;;-1:-1:-1;;;;;;870:284:1;1164:100;1225:32;;;;;;;;;;;;;;;;;1164:100;:::o;1274:121::-;1350:38;;;;;;;;;;;;;;;;;;;;;;;;;1274:121;;:::o;870:284::-;407:5;;1039:17;;393:10;407:5;393:19;;;407:5;;393:19;372:112;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1070:5;1077:9;1088:10;1059:40;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;1059:40:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;1059:40:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1059:40:1;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;1059:40:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;1059:40:1;;;1039:60;;1114:33;1138:2;1142:4;1114:33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;1114:33:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;870:284;;;;;:::o",
+  "source": "pragma solidity ^0.4.22;\n\nimport \"./InterledgerSenderInterface.sol\";\n\ncontract FoodChainAdapter is InterledgerSenderInterface {\n    address owner;\n    \n    event LogInterledgerEventCommitted(uint256 id);\n    event LogInterledgerEventAborted(uint256 id, uint256 reason);\n    \n    constructor() public {\n        owner = msg.sender;\n    }\n\n    modifier onlyOwner() {\n        require(\n            msg.sender == owner,\n            \"Only the contract owner can call this function\"\n        );\n        _;\n    }\n    \n    /**\n     * @dev Function will be called by the FSC supervisor component to notify the interledger component.\n     * @param id The identifier of  the data (internal to the supervisor)\n     * @param boxId The relevant box id\n     * @param sessionId The relevant box session id\n     * @param signatures The generated signatures of the given session\n     */\n    function registerInterledgerEvent(\n        uint256 id, \n        string boxId, \n        string sessionId, \n        bytes32[8] signatures\n    ) public onlyOwner {\n        bytes memory data = abi.encode(boxId, sessionId, signatures);\n        emit InterledgerEventSending(id, data);\n    }\n    \n    function interledgerCommit(uint256 id) public {\n        emit LogInterledgerEventCommitted(id);\n    }\n    \n    function interledgerAbort(uint256 id, uint256 reason) public {\n        emit LogInterledgerEventAborted(id, reason);\n    }\n}",
+  "sourcePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/FoodChainAdapter.sol",
+  "ast": {
+    "absolutePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/FoodChainAdapter.sol",
+    "exportedSymbols": {
+      "FoodChainAdapter": [
+        1687
+      ]
+    },
+    "id": 1688,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1597,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".22"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:1"
+      },
+      {
+        "absolutePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/InterledgerSenderInterface.sol",
+        "file": "./InterledgerSenderInterface.sol",
+        "id": 1598,
+        "nodeType": "ImportDirective",
+        "scope": 1688,
+        "sourceUnit": 1709,
+        "src": "26:42:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1599,
+              "name": "InterledgerSenderInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1708,
+              "src": "99:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_InterledgerSenderInterface_$1708",
+                "typeString": "contract InterledgerSenderInterface"
+              }
+            },
+            "id": 1600,
+            "nodeType": "InheritanceSpecifier",
+            "src": "99:26:1"
+          }
+        ],
+        "contractDependencies": [
+          1708
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1687,
+        "linearizedBaseContracts": [
+          1687,
+          1708
+        ],
+        "name": "FoodChainAdapter",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 1602,
+            "name": "owner",
+            "nodeType": "VariableDeclaration",
+            "scope": 1687,
+            "src": "132:13:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1601,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "132:7:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1606,
+            "name": "LogInterledgerEventCommitted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1605,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1604,
+                  "indexed": false,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1606,
+                  "src": "191:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1603,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "191:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "190:12:1"
+            },
+            "src": "156:47:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1612,
+            "name": "LogInterledgerEventAborted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1611,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1608,
+                  "indexed": false,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1612,
+                  "src": "241:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1607,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "241:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1610,
+                  "indexed": false,
+                  "name": "reason",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1612,
+                  "src": "253:14:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1609,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "253:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "240:28:1"
+            },
+            "src": "208:61:1"
+          },
+          {
+            "body": {
+              "id": 1620,
+              "nodeType": "Block",
+              "src": "300:35:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1618,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 1615,
+                      "name": "owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1602,
+                      "src": "310:5:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1616,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1780,
+                        "src": "318:3:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 1617,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "318:10:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "310:18:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 1619,
+                  "nodeType": "ExpressionStatement",
+                  "src": "310:18:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1621,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1613,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "290:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1614,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "300:0:1"
+            },
+            "scope": 1687,
+            "src": "279:56:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1632,
+              "nodeType": "Block",
+              "src": "362:140:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 1627,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1624,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1780,
+                            "src": "393:3:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 1625,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "393:10:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "id": 1626,
+                          "name": "owner",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1602,
+                          "src": "407:5:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "393:19:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "4f6e6c792074686520636f6e7472616374206f776e65722063616e2063616c6c20746869732066756e6374696f6e",
+                        "id": 1628,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "426:48:1",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_6106cd0471486a8111f375c8ae6231194de2c6708d204ba703cd25c6dc50495c",
+                          "typeString": "literal_string \"Only the contract owner can call this function\""
+                        },
+                        "value": "Only the contract owner can call this function"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_6106cd0471486a8111f375c8ae6231194de2c6708d204ba703cd25c6dc50495c",
+                          "typeString": "literal_string \"Only the contract owner can call this function\""
+                        }
+                      ],
+                      "id": 1623,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        1783,
+                        1784
+                      ],
+                      "referencedDeclaration": 1784,
+                      "src": "372:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 1629,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "372:112:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1630,
+                  "nodeType": "ExpressionStatement",
+                  "src": "372:112:1"
+                },
+                {
+                  "id": 1631,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "494:1:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1633,
+            "name": "onlyOwner",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 1622,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "359:2:1"
+            },
+            "src": "341:161:1",
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1662,
+              "nodeType": "Block",
+              "src": "1029:125:1",
+              "statements": [
+                {
+                  "assignments": [
+                    1649
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1649,
+                      "name": "data",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1663,
+                      "src": "1039:17:1",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes"
+                      },
+                      "typeName": {
+                        "id": 1648,
+                        "name": "bytes",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1039:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_storage_ptr",
+                          "typeString": "bytes"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1656,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1652,
+                        "name": "boxId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1637,
+                        "src": "1070:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1653,
+                        "name": "sessionId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1639,
+                        "src": "1077:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1654,
+                        "name": "signatures",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1643,
+                        "src": "1088:10:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_bytes32_$8_memory_ptr",
+                          "typeString": "bytes32[8] memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_array$_t_bytes32_$8_memory_ptr",
+                          "typeString": "bytes32[8] memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1650,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1767,
+                        "src": "1059:3:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 1651,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "encode",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1059:10:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abiencode_pure$__$returns$_t_bytes_memory_ptr_$",
+                        "typeString": "function () pure returns (bytes memory)"
+                      }
+                    },
+                    "id": 1655,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1059:40:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1039:60:1"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1658,
+                        "name": "id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1635,
+                        "src": "1138:2:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1659,
+                        "name": "data",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1649,
+                        "src": "1142:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "id": 1657,
+                      "name": "InterledgerEventSending",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1695,
+                      "src": "1114:23:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_bytes_memory_ptr_$returns$__$",
+                        "typeString": "function (uint256,bytes memory)"
+                      }
+                    },
+                    "id": 1660,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1114:33:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1661,
+                  "nodeType": "EmitStatement",
+                  "src": "1109:38:1"
+                }
+              ]
+            },
+            "documentation": "@dev Function will be called by the FSC supervisor component to notify the interledger component.\n@param id The identifier of  the data (internal to the supervisor)\n@param boxId The relevant box id\n@param sessionId The relevant box session id\n@param signatures The generated signatures of the given session",
+            "id": 1663,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 1646,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1645,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1633,
+                  "src": "1019:9:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1019:9:1"
+              }
+            ],
+            "name": "registerInterledgerEvent",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1644,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1635,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1663,
+                  "src": "913:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1634,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "913:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1637,
+                  "name": "boxId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1663,
+                  "src": "934:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1636,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "934:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1639,
+                  "name": "sessionId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1663,
+                  "src": "957:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1638,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "957:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1643,
+                  "name": "signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1663,
+                  "src": "984:21:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$8_memory_ptr",
+                    "typeString": "bytes32[8]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1640,
+                      "name": "bytes32",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "984:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "id": 1642,
+                    "length": {
+                      "argumentTypes": null,
+                      "hexValue": "38",
+                      "id": 1641,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "992:1:1",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": null,
+                        "typeString": null
+                      },
+                      "value": "8"
+                    },
+                    "nodeType": "ArrayTypeName",
+                    "src": "984:10:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes32_$8_storage_ptr",
+                      "typeString": "bytes32[8]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "903:108:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1647,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1029:0:1"
+            },
+            "scope": 1687,
+            "src": "870:284:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1672,
+              "nodeType": "Block",
+              "src": "1210:54:1",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1669,
+                        "name": "id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1665,
+                        "src": "1254:2:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 1668,
+                      "name": "LogInterledgerEventCommitted",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1606,
+                      "src": "1225:28:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 1670,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1225:32:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1671,
+                  "nodeType": "EmitStatement",
+                  "src": "1220:37:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1673,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "interledgerCommit",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1666,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1665,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1673,
+                  "src": "1191:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1664,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1191:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1190:12:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1667,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1210:0:1"
+            },
+            "scope": 1687,
+            "src": "1164:100:1",
+            "stateMutability": "nonpayable",
+            "superFunction": 1700,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1685,
+              "nodeType": "Block",
+              "src": "1335:60:1",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1681,
+                        "name": "id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1675,
+                        "src": "1377:2:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1682,
+                        "name": "reason",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1677,
+                        "src": "1381:6:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 1680,
+                      "name": "LogInterledgerEventAborted",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1612,
+                      "src": "1350:26:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256,uint256)"
+                      }
+                    },
+                    "id": 1683,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1350:38:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1684,
+                  "nodeType": "EmitStatement",
+                  "src": "1345:43:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1686,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "interledgerAbort",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1678,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1675,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1686,
+                  "src": "1300:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1674,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1300:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1677,
+                  "name": "reason",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1686,
+                  "src": "1312:14:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1676,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1312:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1299:28:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1679,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1335:0:1"
+            },
+            "scope": 1687,
+            "src": "1274:121:1",
+            "stateMutability": "nonpayable",
+            "superFunction": 1707,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1688,
+        "src": "70:1327:1"
+      }
+    ],
+    "src": "0:1397:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/FoodChainAdapter.sol",
+    "exportedSymbols": {
+      "FoodChainAdapter": [
+        1687
+      ]
+    },
+    "id": 1688,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1597,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".22"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:1"
+      },
+      {
+        "absolutePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/InterledgerSenderInterface.sol",
+        "file": "./InterledgerSenderInterface.sol",
+        "id": 1598,
+        "nodeType": "ImportDirective",
+        "scope": 1688,
+        "sourceUnit": 1709,
+        "src": "26:42:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1599,
+              "name": "InterledgerSenderInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1708,
+              "src": "99:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_InterledgerSenderInterface_$1708",
+                "typeString": "contract InterledgerSenderInterface"
+              }
+            },
+            "id": 1600,
+            "nodeType": "InheritanceSpecifier",
+            "src": "99:26:1"
+          }
+        ],
+        "contractDependencies": [
+          1708
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1687,
+        "linearizedBaseContracts": [
+          1687,
+          1708
+        ],
+        "name": "FoodChainAdapter",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 1602,
+            "name": "owner",
+            "nodeType": "VariableDeclaration",
+            "scope": 1687,
+            "src": "132:13:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1601,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "132:7:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1606,
+            "name": "LogInterledgerEventCommitted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1605,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1604,
+                  "indexed": false,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1606,
+                  "src": "191:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1603,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "191:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "190:12:1"
+            },
+            "src": "156:47:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1612,
+            "name": "LogInterledgerEventAborted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1611,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1608,
+                  "indexed": false,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1612,
+                  "src": "241:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1607,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "241:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1610,
+                  "indexed": false,
+                  "name": "reason",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1612,
+                  "src": "253:14:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1609,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "253:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "240:28:1"
+            },
+            "src": "208:61:1"
+          },
+          {
+            "body": {
+              "id": 1620,
+              "nodeType": "Block",
+              "src": "300:35:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1618,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 1615,
+                      "name": "owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1602,
+                      "src": "310:5:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1616,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1780,
+                        "src": "318:3:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 1617,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "318:10:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "310:18:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 1619,
+                  "nodeType": "ExpressionStatement",
+                  "src": "310:18:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1621,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1613,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "290:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1614,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "300:0:1"
+            },
+            "scope": 1687,
+            "src": "279:56:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1632,
+              "nodeType": "Block",
+              "src": "362:140:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 1627,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1624,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1780,
+                            "src": "393:3:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 1625,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "393:10:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "id": 1626,
+                          "name": "owner",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1602,
+                          "src": "407:5:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "393:19:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "4f6e6c792074686520636f6e7472616374206f776e65722063616e2063616c6c20746869732066756e6374696f6e",
+                        "id": 1628,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "426:48:1",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_6106cd0471486a8111f375c8ae6231194de2c6708d204ba703cd25c6dc50495c",
+                          "typeString": "literal_string \"Only the contract owner can call this function\""
+                        },
+                        "value": "Only the contract owner can call this function"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_6106cd0471486a8111f375c8ae6231194de2c6708d204ba703cd25c6dc50495c",
+                          "typeString": "literal_string \"Only the contract owner can call this function\""
+                        }
+                      ],
+                      "id": 1623,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        1783,
+                        1784
+                      ],
+                      "referencedDeclaration": 1784,
+                      "src": "372:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 1629,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "372:112:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1630,
+                  "nodeType": "ExpressionStatement",
+                  "src": "372:112:1"
+                },
+                {
+                  "id": 1631,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "494:1:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1633,
+            "name": "onlyOwner",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 1622,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "359:2:1"
+            },
+            "src": "341:161:1",
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1662,
+              "nodeType": "Block",
+              "src": "1029:125:1",
+              "statements": [
+                {
+                  "assignments": [
+                    1649
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1649,
+                      "name": "data",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1663,
+                      "src": "1039:17:1",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes"
+                      },
+                      "typeName": {
+                        "id": 1648,
+                        "name": "bytes",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1039:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_storage_ptr",
+                          "typeString": "bytes"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1656,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1652,
+                        "name": "boxId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1637,
+                        "src": "1070:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1653,
+                        "name": "sessionId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1639,
+                        "src": "1077:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1654,
+                        "name": "signatures",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1643,
+                        "src": "1088:10:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_bytes32_$8_memory_ptr",
+                          "typeString": "bytes32[8] memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_array$_t_bytes32_$8_memory_ptr",
+                          "typeString": "bytes32[8] memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1650,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1767,
+                        "src": "1059:3:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 1651,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "encode",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1059:10:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abiencode_pure$__$returns$_t_bytes_memory_ptr_$",
+                        "typeString": "function () pure returns (bytes memory)"
+                      }
+                    },
+                    "id": 1655,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1059:40:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1039:60:1"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1658,
+                        "name": "id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1635,
+                        "src": "1138:2:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1659,
+                        "name": "data",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1649,
+                        "src": "1142:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "id": 1657,
+                      "name": "InterledgerEventSending",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1695,
+                      "src": "1114:23:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_bytes_memory_ptr_$returns$__$",
+                        "typeString": "function (uint256,bytes memory)"
+                      }
+                    },
+                    "id": 1660,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1114:33:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1661,
+                  "nodeType": "EmitStatement",
+                  "src": "1109:38:1"
+                }
+              ]
+            },
+            "documentation": "@dev Function will be called by the FSC supervisor component to notify the interledger component.\n@param id The identifier of  the data (internal to the supervisor)\n@param boxId The relevant box id\n@param sessionId The relevant box session id\n@param signatures The generated signatures of the given session",
+            "id": 1663,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 1646,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1645,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1633,
+                  "src": "1019:9:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1019:9:1"
+              }
+            ],
+            "name": "registerInterledgerEvent",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1644,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1635,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1663,
+                  "src": "913:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1634,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "913:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1637,
+                  "name": "boxId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1663,
+                  "src": "934:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1636,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "934:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1639,
+                  "name": "sessionId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1663,
+                  "src": "957:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1638,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "957:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1643,
+                  "name": "signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1663,
+                  "src": "984:21:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$8_memory_ptr",
+                    "typeString": "bytes32[8]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1640,
+                      "name": "bytes32",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "984:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "id": 1642,
+                    "length": {
+                      "argumentTypes": null,
+                      "hexValue": "38",
+                      "id": 1641,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "992:1:1",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": null,
+                        "typeString": null
+                      },
+                      "value": "8"
+                    },
+                    "nodeType": "ArrayTypeName",
+                    "src": "984:10:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes32_$8_storage_ptr",
+                      "typeString": "bytes32[8]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "903:108:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1647,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1029:0:1"
+            },
+            "scope": 1687,
+            "src": "870:284:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1672,
+              "nodeType": "Block",
+              "src": "1210:54:1",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1669,
+                        "name": "id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1665,
+                        "src": "1254:2:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 1668,
+                      "name": "LogInterledgerEventCommitted",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1606,
+                      "src": "1225:28:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 1670,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1225:32:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1671,
+                  "nodeType": "EmitStatement",
+                  "src": "1220:37:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1673,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "interledgerCommit",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1666,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1665,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1673,
+                  "src": "1191:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1664,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1191:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1190:12:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1667,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1210:0:1"
+            },
+            "scope": 1687,
+            "src": "1164:100:1",
+            "stateMutability": "nonpayable",
+            "superFunction": 1700,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1685,
+              "nodeType": "Block",
+              "src": "1335:60:1",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1681,
+                        "name": "id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1675,
+                        "src": "1377:2:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1682,
+                        "name": "reason",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1677,
+                        "src": "1381:6:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 1680,
+                      "name": "LogInterledgerEventAborted",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1612,
+                      "src": "1350:26:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256,uint256)"
+                      }
+                    },
+                    "id": 1683,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1350:38:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1684,
+                  "nodeType": "EmitStatement",
+                  "src": "1345:43:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1686,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "interledgerAbort",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1678,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1675,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1686,
+                  "src": "1300:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1674,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1300:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1677,
+                  "name": "reason",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1686,
+                  "src": "1312:14:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1676,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1312:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1299:28:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1679,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1335:0:1"
+            },
+            "scope": 1687,
+            "src": "1274:121:1",
+            "stateMutability": "nonpayable",
+            "superFunction": 1707,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1688,
+        "src": "70:1327:1"
+      }
+    ],
+    "src": "0:1397:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.22+commit.4cb486ee.Emscripten.clang"
+  },
+  "networks": {
+    "1584541960724": {
+      "events": {},
+      "links": {},
+      "address": "0xC89Ce4735882C9F0f0FE26686c53074E09B0D550",
+      "transactionHash": "0x36f4b790457cf3c4c89e4dd63553f06146bfcb25bd6c12acac646a31573d1fc5"
+    },
+    "1584542961190": {
+      "events": {},
+      "links": {},
+      "address": "0xC89Ce4735882C9F0f0FE26686c53074E09B0D550",
+      "transactionHash": "0xc4f98db932906bf7461560d6d9e5bd17253c452467f4a5e53ea5940ed64439ff"
+    },
+    "1585316359874": {
+      "events": {},
+      "links": {},
+      "address": "0xC89Ce4735882C9F0f0FE26686c53074E09B0D550",
+      "transactionHash": "0xc4f98db932906bf7461560d6d9e5bd17253c452467f4a5e53ea5940ed64439ff"
+    }
+  },
+  "schemaVersion": "3.0.9",
+  "updatedAt": "2020-03-27T13:39:28.177Z",
+  "devdoc": {
+    "methods": {
+      "registerInterledgerEvent(uint256,string,string,bytes32[8])": {
+        "details": "Function will be called by the FSC supervisor component to notify the interledger component.",
+        "params": {
+          "boxId": "The relevant box id",
+          "id": "The identifier of  the data (internal to the supervisor)",
+          "sessionId": "The relevant box session id",
+          "signatures": "The generated signatures of the given session"
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
