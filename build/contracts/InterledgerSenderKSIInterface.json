@@ -1,5 +1,5 @@
 {
-  "contractName": "InterledgerSenderInterface",
+  "contractName": "InterledgerSenderKSIInterface",
   "abi": [
     {
       "anonymous": false,
@@ -24,6 +24,10 @@
         {
           "name": "id",
           "type": "uint256"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
         }
       ],
       "name": "interledgerCommit",
@@ -56,20 +60,20 @@
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.4.22;\n\n/**\n * This is the abstract interface to be implemented by potential data sender\n */\ncontract InterledgerSenderInterface {\n    // Event for sending data to another ledger\n    event InterledgerEventSending(uint256 id, bytes data);\n\n    /**\n     * @dev Function that will be called when the recipient has accepted the data \n     * @param id The identifier of data sending event\n     */\n    function interledgerCommit(uint256 id) public;\n\n    /**\n     * @dev Function that will be called when the recipient has rejected the data, \n     *      or there have been an error.\n     * @param id The identifier of data sending event\n     * @param reason The error code indicating the reason for failure\n     */\n    function interledgerAbort(uint256 id, uint256 reason) public;\n}",
-  "sourcePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/InterledgerSenderInterface.sol",
+  "source": "pragma solidity ^0.4.22;\n\n/**\n * This is the abstract interface to be implemented by potential data sender\n */\ncontract InterledgerSenderKSIInterface {\n    // Event for sending data to another ledger\n    event InterledgerEventSending(uint256 id, bytes data);\n\n    /**\n     * @dev Function that will be called when the recipient has accepted the data \n     * @param id The identifier of data sending event\n     */\n    function interledgerCommit(uint256 id, bytes memory data) public;\n\n    /**\n     * @dev Function that will be called when the recipient has rejected the data, \n     *      or there have been an error.\n     * @param id The identifier of data sending event\n     * @param reason The error code indicating the reason for failure\n     */\n    function interledgerAbort(uint256 id, uint256 reason) public;\n}",
+  "sourcePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/InterledgerSenderKSIInterface.sol",
   "ast": {
-    "absolutePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/InterledgerSenderInterface.sol",
+    "absolutePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/InterledgerSenderKSIInterface.sol",
     "exportedSymbols": {
-      "InterledgerSenderInterface": [
-        1708
+      "InterledgerSenderKSIInterface": [
+        1832
       ]
     },
-    "id": 1709,
+    "id": 1833,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1689,
+        "id": 1811,
         "literals": [
           "solidity",
           "^",
@@ -77,7 +81,7 @@
           ".22"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:2"
+        "src": "0:24:4"
       },
       {
         "baseContracts": [],
@@ -85,31 +89,31 @@
         "contractKind": "contract",
         "documentation": "This is the abstract interface to be implemented by potential data sender",
         "fullyImplemented": false,
-        "id": 1708,
+        "id": 1832,
         "linearizedBaseContracts": [
-          1708
+          1832
         ],
-        "name": "InterledgerSenderInterface",
+        "name": "InterledgerSenderKSIInterface",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "anonymous": false,
             "documentation": null,
-            "id": 1695,
+            "id": 1817,
             "name": "InterledgerEventSending",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 1694,
+              "id": 1816,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1691,
+                  "id": 1813,
                   "indexed": false,
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1695,
-                  "src": "231:10:2",
+                  "scope": 1817,
+                  "src": "234:10:4",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -117,10 +121,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1690,
+                    "id": 1812,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "231:7:2",
+                    "src": "234:7:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -131,12 +135,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1693,
+                  "id": 1815,
                   "indexed": false,
                   "name": "data",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1695,
-                  "src": "243:10:2",
+                  "scope": 1817,
+                  "src": "246:10:4",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -144,10 +148,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1692,
+                    "id": 1814,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "243:5:2",
+                    "src": "246:5:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -157,14 +161,14 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "230:24:2"
+              "src": "233:24:4"
             },
-            "src": "201:54:2"
+            "src": "204:54:4"
           },
           {
             "body": null,
             "documentation": "@dev Function that will be called when the recipient has accepted the data \n@param id The identifier of data sending event",
-            "id": 1700,
+            "id": 1824,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -172,16 +176,16 @@
             "name": "interledgerCommit",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1698,
+              "id": 1822,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1697,
+                  "id": 1819,
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1700,
-                  "src": "441:10:2",
+                  "scope": 1824,
+                  "src": "444:10:4",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -189,66 +193,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1696,
+                    "id": 1818,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "441:7:2",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "440:12:2"
-            },
-            "payable": false,
-            "returnParameters": {
-              "id": 1699,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "459:0:2"
-            },
-            "scope": 1708,
-            "src": "414:46:2",
-            "stateMutability": "nonpayable",
-            "superFunction": null,
-            "visibility": "public"
-          },
-          {
-            "body": null,
-            "documentation": "@dev Function that will be called when the recipient has rejected the data, \n     or there have been an error.\n@param id The identifier of data sending event\n@param reason The error code indicating the reason for failure",
-            "id": 1707,
-            "implemented": false,
-            "isConstructor": false,
-            "isDeclaredConst": false,
-            "modifiers": [],
-            "name": "interledgerAbort",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 1705,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 1702,
-                  "name": "id",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 1707,
-                  "src": "757:10:2",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 1701,
-                    "name": "uint256",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "757:7:2",
+                    "src": "444:7:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -259,11 +207,67 @@
                 },
                 {
                   "constant": false,
-                  "id": 1704,
-                  "name": "reason",
+                  "id": 1821,
+                  "name": "data",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1707,
-                  "src": "769:14:2",
+                  "scope": 1824,
+                  "src": "456:17:4",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1820,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "456:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "443:31:4"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1823,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "481:0:4"
+            },
+            "scope": 1832,
+            "src": "417:65:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Function that will be called when the recipient has rejected the data, \n     or there have been an error.\n@param id The identifier of data sending event\n@param reason The error code indicating the reason for failure",
+            "id": 1831,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "interledgerAbort",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1829,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1826,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1831,
+                  "src": "779:10:4",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -271,10 +275,36 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1703,
+                    "id": 1825,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "769:7:2",
+                    "src": "779:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1828,
+                  "name": "reason",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1831,
+                  "src": "791:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1827,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "791:7:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -284,40 +314,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "756:28:2"
+              "src": "778:28:4"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1706,
+              "id": 1830,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "791:0:2"
+              "src": "813:0:4"
             },
-            "scope": 1708,
-            "src": "731:61:2",
+            "scope": 1832,
+            "src": "753:61:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1709,
-        "src": "111:683:2"
+        "scope": 1833,
+        "src": "111:705:4"
       }
     ],
-    "src": "0:794:2"
+    "src": "0:816:4"
   },
   "legacyAST": {
-    "absolutePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/InterledgerSenderInterface.sol",
+    "absolutePath": "/home/artemis/EthereumProjects/sofie-sc/contracts/InterledgerSenderKSIInterface.sol",
     "exportedSymbols": {
-      "InterledgerSenderInterface": [
-        1708
+      "InterledgerSenderKSIInterface": [
+        1832
       ]
     },
-    "id": 1709,
+    "id": 1833,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1689,
+        "id": 1811,
         "literals": [
           "solidity",
           "^",
@@ -325,7 +355,7 @@
           ".22"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:2"
+        "src": "0:24:4"
       },
       {
         "baseContracts": [],
@@ -333,31 +363,31 @@
         "contractKind": "contract",
         "documentation": "This is the abstract interface to be implemented by potential data sender",
         "fullyImplemented": false,
-        "id": 1708,
+        "id": 1832,
         "linearizedBaseContracts": [
-          1708
+          1832
         ],
-        "name": "InterledgerSenderInterface",
+        "name": "InterledgerSenderKSIInterface",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "anonymous": false,
             "documentation": null,
-            "id": 1695,
+            "id": 1817,
             "name": "InterledgerEventSending",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 1694,
+              "id": 1816,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1691,
+                  "id": 1813,
                   "indexed": false,
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1695,
-                  "src": "231:10:2",
+                  "scope": 1817,
+                  "src": "234:10:4",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -365,10 +395,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1690,
+                    "id": 1812,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "231:7:2",
+                    "src": "234:7:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -379,12 +409,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1693,
+                  "id": 1815,
                   "indexed": false,
                   "name": "data",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1695,
-                  "src": "243:10:2",
+                  "scope": 1817,
+                  "src": "246:10:4",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -392,10 +422,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1692,
+                    "id": 1814,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "243:5:2",
+                    "src": "246:5:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -405,14 +435,14 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "230:24:2"
+              "src": "233:24:4"
             },
-            "src": "201:54:2"
+            "src": "204:54:4"
           },
           {
             "body": null,
             "documentation": "@dev Function that will be called when the recipient has accepted the data \n@param id The identifier of data sending event",
-            "id": 1700,
+            "id": 1824,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -420,16 +450,16 @@
             "name": "interledgerCommit",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1698,
+              "id": 1822,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1697,
+                  "id": 1819,
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1700,
-                  "src": "441:10:2",
+                  "scope": 1824,
+                  "src": "444:10:4",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -437,66 +467,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1696,
+                    "id": 1818,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "441:7:2",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "440:12:2"
-            },
-            "payable": false,
-            "returnParameters": {
-              "id": 1699,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "459:0:2"
-            },
-            "scope": 1708,
-            "src": "414:46:2",
-            "stateMutability": "nonpayable",
-            "superFunction": null,
-            "visibility": "public"
-          },
-          {
-            "body": null,
-            "documentation": "@dev Function that will be called when the recipient has rejected the data, \n     or there have been an error.\n@param id The identifier of data sending event\n@param reason The error code indicating the reason for failure",
-            "id": 1707,
-            "implemented": false,
-            "isConstructor": false,
-            "isDeclaredConst": false,
-            "modifiers": [],
-            "name": "interledgerAbort",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 1705,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 1702,
-                  "name": "id",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 1707,
-                  "src": "757:10:2",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 1701,
-                    "name": "uint256",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "757:7:2",
+                    "src": "444:7:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -507,11 +481,67 @@
                 },
                 {
                   "constant": false,
-                  "id": 1704,
-                  "name": "reason",
+                  "id": 1821,
+                  "name": "data",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1707,
-                  "src": "769:14:2",
+                  "scope": 1824,
+                  "src": "456:17:4",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1820,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "456:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "443:31:4"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1823,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "481:0:4"
+            },
+            "scope": 1832,
+            "src": "417:65:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Function that will be called when the recipient has rejected the data, \n     or there have been an error.\n@param id The identifier of data sending event\n@param reason The error code indicating the reason for failure",
+            "id": 1831,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "interledgerAbort",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1829,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1826,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1831,
+                  "src": "779:10:4",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -519,10 +549,36 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1703,
+                    "id": 1825,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "769:7:2",
+                    "src": "779:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1828,
+                  "name": "reason",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1831,
+                  "src": "791:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1827,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "791:7:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -532,27 +588,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "756:28:2"
+              "src": "778:28:4"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1706,
+              "id": 1830,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "791:0:2"
+              "src": "813:0:4"
             },
-            "scope": 1708,
-            "src": "731:61:2",
+            "scope": 1832,
+            "src": "753:61:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1709,
-        "src": "111:683:2"
+        "scope": 1833,
+        "src": "111:705:4"
       }
     ],
-    "src": "0:794:2"
+    "src": "0:816:4"
   },
   "compiler": {
     "name": "solc",
@@ -560,7 +616,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.9",
-  "updatedAt": "2020-07-03T07:52:00.730Z",
+  "updatedAt": "2020-07-29T08:45:32.192Z",
   "devdoc": {
     "methods": {
       "interledgerAbort(uint256,uint256)": {
@@ -570,7 +626,7 @@
           "reason": "The error code indicating the reason for failure"
         }
       },
-      "interledgerCommit(uint256)": {
+      "interledgerCommit(uint256,bytes)": {
         "details": "Function that will be called when the recipient has accepted the data ",
         "params": {
           "id": "The identifier of data sending event"
