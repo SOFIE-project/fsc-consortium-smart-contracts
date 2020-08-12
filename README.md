@@ -54,3 +54,14 @@ ACCOUNT_PASSWORD=<password> npm run deploy-staging
 ```
 where ``<password>`` is the account password of the node
 
+## Deploying via docker image
+
+You can build a docker image to use to deploy the contract. To build
+the image run:
+
+```bash
+docker build -t fsc-consortium-smart-contracts-deployer .
+```
+
+Afterwards, you can use it to deploy contracts and extract the smart
+contract addresses. Please see `Dockerfile` for more details.

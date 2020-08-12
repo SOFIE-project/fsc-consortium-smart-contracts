@@ -60,7 +60,14 @@ module.exports = {
       network_id: "32182",
       from: "0xa4dfb027fa681d0c6ef3ab46dabc73bb7c2df48e", // sofie-node
       gas: 6721975
-    }
+    },
+      dynamic: {
+          host: process.env.MIGRATE_HOST || "127.0.0.1",
+          port: parseInt(process.env.MIGRATE_PORT || "7545"),
+          network_id: process.env.MIGRATE_NETWORK_ID || "*",
+          from: process.env.MIGRATE_FROM, // null defaults to first account
+          gas: parseInt(process.env.MIGRATE_GAS || "6721975")
+      }
   },
 
   // Set default mocha options here, use special reporters etc.
