@@ -6,12 +6,12 @@
 #
 # Where applicable environmental variables and their defaults are:
 #
-#  MIGRATE_HOST=127.0.0.1      	JSON-RPC host to connect to
-#  MIGRATE_PORT=7545		Port of the above host
-#  MIGRATE_NETWORK_ID=*		Network ID of target network
-#  MIGRATE_FROM=		Account to use for migrate, empty means first
-#				in the host account list
-#  MIGRATE_GAS=6721975		Gas reserved for migrations
+#  MIGRATE_HOST=127.0.0.1       JSON-RPC host to connect to
+#  MIGRATE_PORT=7545            Port of the above host
+#  MIGRATE_NETWORK_ID=*         Network ID of target network
+#  MIGRATE_FROM=                Account to use for migrate, empty means first
+#                               in the host account list
+#  MIGRATE_GAS=6721975          Gas reserved for migrations
 #
 # To get the deployed contract address, mount a directory to /build in
 # the host, and then look for the JSON files of the deployed contracts
@@ -20,7 +20,7 @@
 # deployed contract with:
 #
 #   cat output-dir/contracts/SampleContract.json | \
-#	jq -r '.networks | to_entries | map(.value.address)[0]'
+#       jq -r '.networks | to_entries | map(.value.address)[0]'
 #
 # Please do use this method instead of parsing output of truffle
 # migrate...
