@@ -34,7 +34,7 @@ contract('FoodChainAdapter', accounts => {
         await foodChainAdapterContract.registerInterledgerEvent(...payload, {from: owner})
         let tx = await foodChainAdapterContract.interledgerCommit(payload[0], {from: accounts[1]})
 
-        truffleAssert.eventEmitted(tx, 'InterledgerEventCommited', (ev) => {
+        truffleAssert.eventEmitted(tx, 'LogInterledgerEventCommitted', (ev) => {
             return ev.id = payload[0]
         })
     })
@@ -43,7 +43,7 @@ contract('FoodChainAdapter', accounts => {
         await foodChainAdapterContract.registerInterledgerEvent(...payload, {from: owner})
         let tx = await foodChainAdapterContract.interledgerAbort(payload[0], 0, {from: accounts[1]})
 
-        truffleAssert.eventEmitted(tx, 'InterledgerEventAborted', (ev) => {
+        truffleAssert.eventEmitted(tx, 'LogInterledgerEventAborted', (ev) => {
             return ev.id = payload[0]
         })
     })
