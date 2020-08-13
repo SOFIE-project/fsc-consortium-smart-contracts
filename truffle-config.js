@@ -72,6 +72,7 @@ module.exports = {
 
   // Set default mocha options here, use special reporters etc.
   mocha: {
+      "reporter": "mocha-junit-reporter"
     // timeout: 100000
   },
 
