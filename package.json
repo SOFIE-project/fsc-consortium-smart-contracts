@@ -7,7 +7,7 @@
     "test": "./node_modules/.bin/truffle test",
     "compile": "./node_modules/.bin/truffle compile",
     "dev-blockchain": "./node_modules/.bin/ganache-cli -d --db chain/ -h 0.0.0.0",
-    "deploy-local": "./node_modules/.bin/truffle migrate --network development",
+    "deploy-local": "./node_modules/.bin/truffle migrate --network local",
     "deploy-staging": "./node_modules/.bin/truffle migrate --network staging",
     "deploy-production": "./node_modules/.bin/truffle migrate --network production"
   },

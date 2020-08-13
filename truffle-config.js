@@ -42,7 +42,7 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    development: {
+    local: {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 8545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
@@ -61,13 +61,13 @@ module.exports = {
       from: "0xa4dfb027fa681d0c6ef3ab46dabc73bb7c2df48e", // sofie-node
       gas: 6721975
     },
-      dynamic: {
-          host: process.env.MIGRATE_HOST || "127.0.0.1",
-          port: parseInt(process.env.MIGRATE_PORT || "7545"),
-          network_id: process.env.MIGRATE_NETWORK_ID || "*",
-          from: process.env.MIGRATE_FROM, // null defaults to first account
-          gas: parseInt(process.env.MIGRATE_GAS || "6721975")
-      }
+    dynamic: {
+        host: process.env.MIGRATE_HOST || "127.0.0.1",
+        port: parseInt(process.env.MIGRATE_PORT || "7545"),
+        network_id: process.env.MIGRATE_NETWORK_ID || "*",
+        from: process.env.MIGRATE_FROM, // null defaults to first account
+        gas: parseInt(process.env.MIGRATE_GAS || "6721975")
+    }
   },
 
   // Set default mocha options here, use special reporters etc.
